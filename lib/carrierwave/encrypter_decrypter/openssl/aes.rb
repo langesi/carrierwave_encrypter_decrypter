@@ -25,6 +25,7 @@ module Openssl
         end
         File.unlink(model.send(mounted_as).path)
       rescue Exception => e
+        puts "There has been a difficulty with the encryption of a file"
         puts "****************************#{e.message}"
         puts "****************************#{e.backtrace.inspect}"
       end
