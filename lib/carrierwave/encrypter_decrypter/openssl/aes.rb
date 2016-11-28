@@ -13,9 +13,9 @@ module Openssl
         model.save!
 
         original_file_path = File.expand_path(obj.store_path, obj.root)
-        encrypted_file_path = File.expand_path(obj.store_path, obj.root) + ".enc"
+        # encrypted_file_path = File.expand_path(obj.store_path, obj.root) + ".enc"
         buf = ""
-        File.open(encrypted_file_path, "wb") do |outf|
+        File.open(original_file_path, "wb") do |outf|
           File.open(model.send(mounted_as).path, "rb") do |inf|
             while inf.read(4096, buf)
               outf << cipher.update(buf)
@@ -41,15 +41,15 @@ module Openssl
         buf = ""
 
         original_file_path =  obj.send(mounted_as).root + obj.send(mounted_as).url
-        encrypted_file_path =  obj.send(mounted_as).root + obj.send(mounted_as).url  + ".enc"
+        # encrypted_file_path =  obj.send(mounted_as).root + obj.send(mounted_as).url  + ".enc"
 
         File.open(original_file_path, "wb") do |outf|
-          File.open(encrypted_file_path, "rb") do |inf|
+          # File.open(encrypted_file_path, "rb") do |inf|
             while inf.read(4096, buf)
               outf << cipher.update(buf)
             end
             outf << cipher.final
-          end
+          # end
         end
       rescue Exception => e
         puts "****************************#{e.message}"
