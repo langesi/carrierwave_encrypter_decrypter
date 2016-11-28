@@ -53,6 +53,7 @@ module Openssl
           end
         end
       rescue Exception => e
+        puts "There has been a difficulty with the decryption of a file"
         puts "****************************#{e.message}"
         puts "****************************#{e.backtrace.inspect}"
       end
